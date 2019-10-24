@@ -1,7 +1,4 @@
 os: windows
-branches:
-  only:
-  - master
 jobs:
   include:
   - stage: build
