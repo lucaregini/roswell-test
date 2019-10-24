@@ -5,7 +5,7 @@ jobs:
   - stage: build
     script:
     - wget https://github.com/roswell/roswell/releases/download/v19.09.12.102/roswell_19.09.12.102_amd64.zip
-    - 7z e roswell_19.09.12.102_amd64.zip
+    - 7z x roswell_19.09.12.102_amd64.zip
     - cd roswell
     - ros init
     - ros install sbcl
