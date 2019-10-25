@@ -1,12 +1,26 @@
-os: windows
+os: 
+  - windows
+  - linux
+  - macos
 language: c
 jobs:
   include:
+  - stage: install
+    script:
+    # Windows
+    - ROSWELL_WINDOWS="https://github.com/roswell/roswell/releases/download/v19.09.12.102/roswell_19.09.12.102_amd64.zip"
+    - if [ "$TRAVIS_OS_NAME" = "windows" ]; then wget $ROSWELL_WINDOWS; fi
+    - if [ "$TRAVIS_OS_NAME" = "windows" ]; then 7z x roswell_19.09.12.102_amd64.zip; fi
+    - if [ "$TRAVIS_OS_NAME" = "windows" ]; then export PATH="`pwd`/roswell:${PATH}" fi
+    # macOS
+    - if [ "$TRAVIS_OS_NAME" = "osx" ]    ; then brew install roswell; fi
+    # Linux
+    - ROSWELL_LINUX="https://github.com/roswell/roswell/releases/download/v19.09.12.102/roswell_19.09.12.102-1_amd64.deb"
+    - if [ "$TRAVIS_OS_NAME" = "osx" ]    ; then wget $ROSWELL_LINUX; fi
+    - if [ "$TRAVIS_OS_NAME" = "osx" ]    ; then dpkg -i roswell_19.09.12.102-1_amd64.deb; fi
   - stage: build
     script:
-    - wget https://github.com/roswell/roswell/releases/download/v19.09.12.102/roswell_19.09.12.102_amd64.zip
-    - 7z x roswell_19.09.12.102_amd64.zip
-    - cd roswell
-    - ./ros init
-    - ./ros install sbcl
+    # Install
+    - ros init
+    - ros install sbcl
 
