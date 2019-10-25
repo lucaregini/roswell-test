@@ -13,8 +13,8 @@ install:
   - if [ "$TRAVIS_OS_NAME" = "osx" ]    ; then brew install roswell; fi
   # Linux
   - ROSWELL_LINUX="https://github.com/roswell/roswell/releases/download/v19.09.12.102/roswell_19.09.12.102-1_amd64.deb"
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]    ; then wget $ROSWELL_LINUX; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]    ; then dpkg -i roswell_19.09.12.102-1_amd64.deb; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]  ; then wget $ROSWELL_LINUX; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]  ; then dpkg -i roswell_19.09.12.102-1_amd64.deb; fi
 script:
   # Install
   - ros init
