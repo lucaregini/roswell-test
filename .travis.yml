@@ -1,11 +1,11 @@
 os: 
   - windows
   - linux
-  - macos
+  - osx
 language: c
 jobs:
   include:
-  - stage: install
+  - stage: roswell
     script:
     # Windows
     - ROSWELL_WINDOWS="https://github.com/roswell/roswell/releases/download/v19.09.12.102/roswell_19.09.12.102_amd64.zip"
