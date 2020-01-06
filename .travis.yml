@@ -1,12 +1,22 @@
-os: windows
-language: minimal
-jobs:
-  include:
-  - stage: build
-    script:
-    - wget https://github.com/roswell/roswell/releases/download/v19.09.12.102/roswell_19.09.12.102_amd64.zip
-    - 7z e roswell_19.09.12.102_amd64.zip
-    - cd roswell
-    - ros -v init
-    - ros -v install sbcl
+os: 
+  - windows
+  - linux
+  - osx
+language: c
+install:
+  # Windows
+  - ROSWELL_WINDOWS="https://github.com/roswell/roswell/releases/download/v19.09.12.102/roswell_19.09.12.102_amd64.zip"
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then wget $ROSWELL_WINDOWS; fi
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then 7z x roswell_19.09.12.102_amd64.zip; fi
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then export PATH="`pwd`/roswell:${PATH}"; fi
+  # macOS
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]    ; then HOMEBREW_NO_AUTO_UPDATE=1 brew install roswell; fi
+  # Linux
+  - ROSWELL_LINUX="https://github.com/roswell/roswell/releases/download/v19.09.12.102/roswell_19.09.12.102-1_amd64.deb"
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]  ; then wget $ROSWELL_LINUX; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]  ; then sudo dpkg -i roswell_19.09.12.102-1_amd64.deb; fi
+script:
+  # Install
+  - ros init
+  - ros install sbcl
 
