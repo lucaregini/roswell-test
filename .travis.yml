@@ -5,10 +5,10 @@ os:
 language: c
 install:
   # Windows
-  - ROSWELL_WINDOWS="https://github.com/lucaregini/roswell/raw/master/releases/test-release-5-jan-2019.zip"
+  - ROSWELL_WINDOWS="https://github.com/lucaregini/roswell/raw/master/releases/roswell_19.09.12.102_amd64-test1.zip"
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then wget $ROSWELL_WINDOWS; fi
-  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then 7z x test-release-5-jan-2019.zip; fi
-  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then mv test-release-5-jan-2019/roswell .; fi
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then 7z x roswell_19.09.12.102_amd64-test1.zip; fi
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then mv roswell_19.09.12.102_amd64-test1/roswell .; fi
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then export PATH="`pwd`/roswell:${PATH}"; fi
   # macOS
   - if [ "$TRAVIS_OS_NAME" = "osx" ]    ; then HOMEBREW_NO_AUTO_UPDATE=1 brew install roswell; fi
